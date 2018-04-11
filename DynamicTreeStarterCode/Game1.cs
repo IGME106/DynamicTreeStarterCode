@@ -14,6 +14,9 @@ namespace DynamicTreeStarterCode
 		GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
 
+        // Random number generator
+        Random myRandom = new Random();
+
 		// The three trees
 		Tree treeRed;
 		Tree treeGreen;
@@ -52,10 +55,40 @@ namespace DynamicTreeStarterCode
 			treeGreen = new Tree(spriteBatch, Color.Green);
 			treeBlue = new Tree(spriteBatch, Color.DodgerBlue);
 
-			// *** FILL EACH TREE WITH DATA HERE ***************************
-			
+            // Populate treeRed
+            for (int i = 0; i < 200; i++)
+            {
+                treeRed.Insert(myRandom.Next(-100, 100));
+            }
 
-		}
+            // Populate treeGreen
+            for (int i = 0; i < 35; i++)
+            {
+                treeGreen.Insert(i);
+            }
+
+            // Populate treeBlue
+            for (int i = 0; i < 2000; i += 200)
+            {
+                treeBlue.Insert(i);
+                
+                if ((i == 200) || ((i % 400) == 0))
+                {
+                    for (int j = 1; j < 10; j++)
+                    {
+                        treeBlue.Insert((i - 100) + j);
+
+                        if ((j == 5) || ((j % 5) == 0))
+                        {
+                            for (int k = 1; k < 10; k++)
+                            {
+                                treeBlue.Insert((j - 10) + k);
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
 		/// <summary>
 		/// UnloadContent will be called once per game and is the place to unload
